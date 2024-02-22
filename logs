@@ -1,0 +1,112 @@
++ ./zap.sh -cmd -port 8090 -autorun JuiceShop.yaml
+Found Java version 11.0.21
+Available memory: 7889 MB
+Using JVM args: -Xmx1972m
+Job authentication set method = json
+Job authentication set parameters = {loginRequestBody={"email":"{%username%}","password":"{%password%}"}, loginPageUrl=http://3.91.98.231:3000/rest/user/login , loginRequestUrl=http://3.91.98.231:3000/#/login}
+Job verification set method = poll
+Job verification set loggedInRegex = /"status": "success"/i 
+Job verification set pollFrequency = 60
+Job verification set pollUnits = requests
+Job verification set pollUrl = http://3.91.98.231:3000/rest/user/whoami 
+Job verification set pollPostData = 
+Job sessionManagement set method = cookie
+Job sessionManagement set parameters = {}
+Job users set name = games
+Job users set credentials = {password=games, username=games62541@lendfash.com}
+Job passiveScan-config set scanOnlyInScope = true
+Job passiveScan-config set enableTags = false
+Job passiveScan-config set disableAllRules = false
+Job spider set context = juice shop
+Job spider set user = games
+Job spider set url = http://3.91.98.231:3000
+Job spider set maxDuration = 0
+Job spider set maxDepth = 0
+Job spider set maxChildren = 0
+Job spider set acceptCookies = false
+Job spider set handleODataParametersVisited = false
+Job spider set handleParameters = IGNORE_COMPLETELY
+Job spider set maxParseSizeBytes = 0
+Job spider set parseComments = false
+Job spider set parseGit = false
+Job spider set parseRobotsTxt = false
+Job spider set parseSitemapXml = false
+Job spider set parseSVNEntries = false
+Job spider set postForm = false
+Job spider set processForm = false
+Job spider set requestWaitTime = 0
+Job spider set sendRefererHeader = false
+Job spider set userAgent = 
+Job spider/stats/null set onFail = Info
+Job spider/stats/null set statistic = automation.spider.urls.added
+Job spider/stats/null set site = 
+Job spider/stats/null set operator = >=
+Job spider/stats/null set value = 100
+Job spider/stats/null set type = stats
+Job spider/stats/null set name = At least 100 URLs found
+Job spider adding test of type stats : At least 100 URLs found
+Job activeScan set context = juice shop
+Job activeScan set user = games
+Job activeScan set policy = 
+Job activeScan set maxRuleDurationInMins = 0
+Job activeScan set maxScanDurationInMins = 0
+Job activeScan set maxAlertsPerRule = 0
+Job activeScan set defaultStrength = medium
+Job activeScan set defaultThreshold = high
+Job passiveScan-wait set maxDuration = 1
+Unrecognised parameter for job passiveScan-wait : context
+Unrecognised parameter for job passiveScan-wait : user
+Job spiderAjax set context = juice shop
+Job spiderAjax set user = games
+Job spiderAjax set url = http://3.91.98.231:3000
+Job spiderAjax set maxDuration = 60
+Job spiderAjax set maxCrawlDepth = 1
+Job spiderAjax set numberOfBrowsers = 4
+Job spiderAjax set browserId = chrome-headless
+Job spiderAjax set maxCrawlStates = 0
+Job spiderAjax set eventWait = 1,000
+Job spiderAjax set reloadWait = 1,000
+Job spiderAjax set clickDefaultElems = true
+Job spiderAjax set clickElemsOnce = true
+Job spiderAjax set randomInputs = true
+Job spiderAjax set inScopeOnly = true
+Job spiderAjax set runOnlyIfModern = false
+Job spiderAjax/stats/null set onFail = Info
+Job spiderAjax/stats/null set statistic = spiderAjax.urls.added
+Job spiderAjax/stats/null set site = 
+Job spiderAjax/stats/null set operator = >=
+Job spiderAjax/stats/null set value = 100
+Job spiderAjax/stats/null set type = stats
+Job spiderAjax/stats/null set name = At least 100 URLs found
+Job spiderAjax adding test of type stats : At least 100 URLs found
+Job report set template = risk-confidence-html
+Job report set theme = original
+Job report set reportDir = /var/lib/jenkins/workspace/ZAP/
+Job report set reportFile = JuiceShop
+Job report set reportTitle = ZAP Scanning Report
+Job report set reportDescription = 
+Job report set displayReport = false
+Job passiveScan-config started
+Job passiveScan-config finished, time taken: 00:00:00
+Job spider started
+Job spider requesting URL http://3.91.98.231:3000
+Job spider found 2 URLs
+Job spider test of type stats failed: At least 100 URLs found [2 < 100]
+Job spider finished, time taken: 00:00:02
+Job activeScan started
+Job activeScan set default strength to MEDIUM
+Job activeScan set default threshold to HIGH
+Job activeScan finished, time taken: 00:04:09
+Job passiveScan-wait started
+Job passiveScan-wait finished, time taken: 00:00:01
+Job spiderAjax started
+Job spiderAjax found 0 URLs
+Job spiderAjax test of type stats failed: At least 100 URLs found [0 < 100]
+Job spiderAjax finished, time taken: 00:00:01
+Job report started
+Job report generated report /var/lib/jenkins/workspace/ZAP/JuiceShop.html
+Job report finished, time taken: 00:00:01
+Automation plan warnings:
+	Unrecognised parameter for job passiveScan-wait : context
+	Unrecognised parameter for job passiveScan-wait : user
++ [ 2 -ne 1 ]

@@ -1,0 +1,161 @@
+---
+env:
+  contexts:
+  - name: "juice shop"
+    urls:
+    - "http://3.91.98.231:3000"
+    includePaths:
+    - "http://3.91.98.231:3000.*"
+    excludePaths: []
+    authentication:
+      method: "json"
+      parameters:
+        loginPageUrl: "http://3.91.98.231:3000/rest/user/login "
+        loginRequestUrl: "http://3.91.98.231:3000/#/login"
+        loginRequestBody: "{\"email\":\"{%username%}\",\"password\":\"{%password%}\"\
+          }"
+      verification:
+        method: "poll"
+        loggedInRegex: "/\"status\": \"success\"/i "
+        pollFrequency: 60
+        pollUnits: "requests"
+        pollUrl: "http://3.91.98.231:3000/rest/user/whoami "
+        pollPostData: ""
+    sessionManagement:
+      method: "cookie"
+      parameters: {}
+    technology:
+      exclude: []
+    users:
+    - name: "games"
+      credentials:
+        password: "games"
+        username: "games62541@lendfash.com"
+  parameters:
+    failOnError: true
+    failOnWarning: false
+    progressToStdout: true
+  vars: {}
+jobs:
+- parameters:
+    scanOnlyInScope: true
+    enableTags: false
+    disableAllRules: false
+  rules: []
+  name: "passiveScan-config"
+  type: "passiveScan-config"
+- parameters:
+    context: "juice shop"
+    user: "games"
+    url: "http://3.91.98.231:3000"
+    maxDuration: 0
+    maxDepth: 0
+    maxChildren: 0
+    acceptCookies: false
+    handleODataParametersVisited: false
+    handleParameters: "IGNORE_COMPLETELY"
+    maxParseSizeBytes: 0
+    parseComments: false
+    parseGit: false
+    parseRobotsTxt: false
+    parseSitemapXml: false
+    parseSVNEntries: false
+    postForm: false
+    processForm: false
+    requestWaitTime: 0
+    sendRefererHeader: false
+    userAgent: ""
+  name: "spider"
+  type: "spider"
+  tests:
+  - onFail: "INFO"
+    statistic: "automation.spider.urls.added"
+    site: ""
+    operator: ">="
+    value: 100
+    type: "stats"
+    name: "At least 100 URLs found"
+- parameters:
+    context: "juice shop"
+    user: "games"
+    policy: ""
+    maxRuleDurationInMins: 0
+    maxScanDurationInMins: 0
+    maxAlertsPerRule: 0
+  policyDefinition:
+    defaultStrength: "medium"
+    defaultThreshold: "high"
+    rules: []
+  name: "activeScan"
+  type: "activeScan"
+- parameters:
+    maxDuration: 1
+    context: "juice shop"
+    user: "games"
+  name: "passiveScan-wait"
+  type: "passiveScan-wait"
+- parameters:
+    context: "juice shop"
+    user: "games"
+    url: "http://3.91.98.231:3000"
+    maxDuration: 60
+    maxCrawlDepth: 1
+    numberOfBrowsers: 4
+    browserId: "chrome-headless"
+    maxCrawlStates: 0
+    eventWait: 1000
+    reloadWait: 1000
+    clickDefaultElems: true
+    clickElemsOnce: true
+    randomInputs: true
+    inScopeOnly: true
+    runOnlyIfModern: false
+  name: "spiderAjax"
+  type: "spiderAjax"
+  tests:
+  - onFail: "INFO"
+    statistic: "spiderAjax.urls.added"
+    site: ""
+    operator: ">="
+    value: 100
+    type: "stats"
+    name: "At least 100 URLs found"
+- parameters:
+    template: "risk-confidence-html"
+    theme: "original"
+    reportDir: "/var/lib/jenkins/workspace/ZAP/"
+    reportFile: "JuiceShop"
+    reportTitle: "ZAP Scanning Report"
+    reportDescription: ""
+    displayReport: false
+  risks:
+  - "info"
+  - "low"
+  - "medium"
+  - "high"
+  confidences:
+  - "falsepositive"
+  - "low"
+  - "medium"
+  - "high"
+  - "confirmed"
+  sections:
+  - "siteRiskCounts"
+  - "responseBody"
+  - "appendix"
+  - "alertTypes"
+  - "responseHeader"
+  - "alertTypeCounts"
+  - "riskConfidenceCounts"
+  - "alerts"
+  - "aboutThisReport"
+  - "contents"
+  - "requestBody"
+  - "reportDescription"
+  - "reportParameters"
+  - "requestHeader"
+  - "summaries"
+  sites: []
+  name: "report"
+  type: "report"
+

@@ -159,3 +159,48 @@ jobs:
   name: "report"
   type: "report"
 
+
+
+
+
+
+job "prometheus-exec" {
+  datacenters = ["dc1"]
+  type = "service"
+  update {
+    stagger      = "30s"
+    max_parallel = 1
+  }
+
+  
+
+  group "prometheus-group" {
+    count = 2
+    network {
+      port "prometheus_ui" {
+        static = 9090
+      }
+    }
+
+    task "prom-setup" {
+      driver = "exec"
+        service {
+   			name = "prometheus-ui"
+    		port = "prometheus_ui"
+    		check {
+      			name     = "prometheus_ui port alive"
+      			type     = "tcp"
+      			interval = "10s"
+      			timeout  = "2s"
+    }
+  }
+
+      config {
+        command = "C:\\Program Files\\Prometheus\\prometheus.exe"
+        args    = ["--config.file", "C:\\Program Files\\Prometheus\\prometheus.yml"]
+      }
+      
+    
+    }
+  }
+}
